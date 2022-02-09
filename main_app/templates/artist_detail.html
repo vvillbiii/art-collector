@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+<section class="hero is-success is-large">
+  <div class="hero-body has-text-centered">
+    <p class="title is-1">{{artist.name}}</p>
+    <p class="subtitle">{{artist.period}}</p>
+  </div>
+</section>
+<div class="columns">
+    <div class="column">
+      <a href="{% url 'artist_update' artist.pk %}" class="button is-warning"
+        >Update {{artist.name}} Information</a
+      >
+    </div>
+    <div class="column">
+      <a href="{% url 'artist_delete' artist.pk %}" class="button is-danger"
+        >Delete {{artist.name}}</a
+      >
+    </div>
+  </div>
+</section>
+{% endblock %}
