@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+<section class="hero is-success is-large">
+  <div class="hero-body">
+    <p class="title is-1">Art Collector Featured Artists</p>
+  </div>
+</section>
+<section class="container mt-5">
+  <div class="gallery mt-5">
+    {% for painter in painters %}
+    <a href="">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-square">
+            <img src="{{painter.image}}" alt="{{painter.name}}" />
+          </figure>
+        </div>
+        <div class="card-header">
+          <p class="card-header-title">{{painter.name}}</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
