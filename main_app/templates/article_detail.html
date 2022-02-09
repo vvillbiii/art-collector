@@ -11,5 +11,8 @@
   <a href="{% url 'article_update' article.pk %}" class="button is-info mt-5"
     >Update Article</a
   >
+  <a href="{% url 'article_delete' article.pk %}" class="button is-danger"
+    >Delete {{article.title}}</a
+  >
 </section>
 {% endblock %}
