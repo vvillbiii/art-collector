@@ -23,3 +23,15 @@ class Painting(models.Model):
     
     class Meta:
         ordering = ['name']
+
+class Article(models.Model):
+    title = models.CharField(max_length=300)
+    author = models.CharField(max_length=300)
+    image = models.CharField(max_length=500)
+    body = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['title']
