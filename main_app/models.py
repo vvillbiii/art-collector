@@ -35,3 +35,11 @@ class Article(models.Model):
 
     class Meta:
         ordering = ['title']
+
+class Collection(models.Model):
+    name = models.CharField(max_length=300)
+    image = models.CharField(max_length=500)
+    paintings = models.ManyToManyField(Painting)
+
+    def __str__(self):
+        return self.name

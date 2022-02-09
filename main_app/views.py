@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Artist, Painting, Article
+from .models import Artist, Painting, Article, Collection
 from django.shortcuts import redirect
 from django.urls import reverse
 
@@ -87,3 +87,21 @@ class ArticleDelete(DeleteView):
     model = Article
     template_name = 'article_delete_confirmation.html'
     success_url = '/articles/'
+
+class CollectionList(TemplateView):
+    template_name = "collection_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["collections"] = Collection.objects.all()
+        return context
+
+class CollectionDetail(DetailView):
+    model = Collection
+    template_name = "collection_detail.html"
+
+class CollectionCreate(CreateView):
+    model = Collection
+    fields = ['name', 'image', 'paintings']
+    template_name = "collection_create.html"
+    success_url = '/collections/'

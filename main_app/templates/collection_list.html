@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<section class="hero is-large is-success">
+  <div class="hero-body">
+    <p class="title is-1">Featured Collections</p>
+  </div>
+</section>
+<section class="container">
+  <div class="gallery mt-5">
+    {% for collection in collections %}
+    <a href="{% url 'collection_detail' collection.pk %}" class="title is-4"
+      >{{collection.name}}
+    </a>
+    {% endfor %}
+  </div>
+  <a href="{% url 'collection_create' %}" class="button is-info"
+    >Add New Collection</a
+  >
+</section>
+{% endblock %}

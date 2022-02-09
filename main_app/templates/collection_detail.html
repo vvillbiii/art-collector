@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+<section class="hero is-large is-success">
+  <div class="hero-body has-text-centered">
+    <p class="title is-1">{{collection.name}}</p>
+  </div>
+</section>
+<section class="container">
+    <div class="gallery mt-5">
+        {% for painting in collection.paintings.all %}
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-square">
+                <img src="{{painting.image}}" alt="{{painting.name}}" />
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="content">
+                <p><strong>{{painting.name}}</strong></p>
+                <p>By: {{painting.artist}}</p>
+                <p>Released: {{painting.year}}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% empty %}
+        <article>
+          <div>
+            <p class="title is-5">No paintings showing currently</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+</section>
+{% endblock %}
