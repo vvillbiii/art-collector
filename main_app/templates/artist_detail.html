@@ -5,7 +5,79 @@
     <p class="subtitle">{{artist.period}}</p>
   </div>
 </section>
-<div class="columns">
+<section class="container mt-5">
+  <div class="detail__painting mb-5">
+    <h3 class="title is-3">Collected Paintings</h3>
+    <div class="gallery mt-5">
+      {% for painting in artist.paintings.all %}
+      <a href="{% url 'painting_detail' artist.pk painting.pk %}">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-square">
+              <img src="{{painting.image}}" alt="{{painting.name}}" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <p><strong>{{painting.name}}</strong></p>
+              <p>Released: {{painting.year}}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% empty %}
+      <article>
+        <div>
+          <p class="title is-5">No paintings collected</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <h1 class="title is-5 mt-5">Add a painting</h1>
+
+    <form
+      class="mb-5"
+      action="{% url 'painting_create' artist.pk %}"
+      method="post"
+    >
+      {% csrf_token %}
+      <div class="field has-addons">
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            name="name"
+            placeholder="name"
+            required
+          />
+        </div>
+        <div class="control">
+          <input
+            class="input"
+            type="number"
+            name="year"
+            placeholder="year"
+            min="1"
+            required
+          />
+        </div>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            name="image"
+            placeholder="image"
+            required
+          />
+        </div>
+        <div class="control">
+          <input class="button is-primary" type="submit" value="Add Painting" />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="columns">
     <div class="column">
       <a href="{% url 'artist_update' artist.pk %}" class="button is-warning"
         >Update {{artist.name}} Information</a

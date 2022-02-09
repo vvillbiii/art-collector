@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Artist
+from .models import Artist, Painting
 from django.shortcuts import redirect
 from django.urls import reverse
 
@@ -44,3 +44,16 @@ class ArtistDelete(DeleteView):
     model = Artist
     template_name = 'artist_delete_confirmation.html'
     success_url = '/artists/'
+
+class PaintingCreate(View):
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        image = request.POST.get("image")
+        year = request.POST.get("year")
+        artist = Artist.objects.get(pk=pk)
+        Painting.objects.create(name=name, image=image, year=year, artist=artist)
+        return redirect('artist_detail', pk=pk)
+
+class PaintingDetail(DetailView):
+    model = Painting
+    template_name = "painting_detail.html"
