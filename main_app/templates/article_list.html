@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<section class="hero is-success is-large">
+  <div class="hero-body">
+    <p class="title is-1">Articles</p>
+  </div>
+</section>
+<section class="container">
+  <div class="gallery mt-5">
+    {% for article in articles %}
+    <a href="{% url 'article_detail' article.pk %}" class="title is-4"
+      >{{article.title}}
+    </a>
+    {% endfor %}
+  </div>
+  <a href="{% url 'article_create' %}" class="button is-info"
+    >Write New Article</a
+  >
+</section>
+
+{% endblock %}

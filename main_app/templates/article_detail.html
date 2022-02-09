@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<section class="hero is-small">
+  <div class="hero-body has-text-centered">
+    <img src="{{article.image}}" alt="" />
+    <p class="title is-1">{{article.title}}</p>
+    <p class="subtitle">{{article.author}}</p>
+  </div>
+</section>
+<section class="container mt-5">
+  <div>{{article.body}}</div>
+  <a href="{% url 'article_update' article.pk %}" class="button is-info mt-5"
+    >Update Article</a
+  >
+</section>
+{% endblock %}

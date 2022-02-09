@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Artist, Painting
+from .models import Artist, Painting, Article
 from django.shortcuts import redirect
 from django.urls import reverse
 
@@ -57,3 +57,28 @@ class PaintingCreate(View):
 class PaintingDetail(DetailView):
     model = Painting
     template_name = "painting_detail.html"
+
+class ArticleList(TemplateView):
+    template_name = "article_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["articles"] = Article.objects.all()
+        return context
+
+class ArticleCreate(CreateView):
+    model = Article
+    fields = ['title', 'author', 'image','body']
+    template_name = "article_create.html"
+    success_url = '/articles/'
+
+class ArticleDetail(DetailView):
+    model = Article
+    template_name = "article_detail.html"
+
+class ArticleUpdate(UpdateView):
+    model = Article
+    fields = ['title', 'author', 'image', 'body']
+    template_name = 'article_update.html'
+    def get_success_url(self):
+        return reverse('article_detail', kwargs={'pk': self.object.pk})

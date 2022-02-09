@@ -11,4 +11,8 @@ urlpatterns = [
     path('artists/<int:pk>/delete', views.ArtistDelete.as_view(), name="artist_delete"),
     path('artists/<int:pk>/paintings/new', views.PaintingCreate.as_view(), name="painting_create"),
     path('artists/<int:pk>/paintings/<int:painting_pk>', views.PaintingDetail.as_view(), name="painting_detail"),
+    path('articles/', views.ArticleList.as_view(), name='article_list'),
+    path('articles/new', views.ArticleCreate.as_view(), name='article_create'),
+    path('articles/<int:pk>', views.ArticleDetail.as_view(), name="article_detail"),
+    path('articles/<int:pk>/update', views.ArticleUpdate.as_view(), name='article_update'),
 ]
