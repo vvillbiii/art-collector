@@ -82,3 +82,8 @@ class ArticleUpdate(UpdateView):
     template_name = 'article_update.html'
     def get_success_url(self):
         return reverse('article_detail', kwargs={'pk': self.object.pk})
+
+class ArticleDelete(DeleteView):
+    model = Article
+    template_name = 'article_delete_confirmation.html'
+    success_url = '/articles/'
