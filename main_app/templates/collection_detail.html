@@ -30,5 +30,10 @@
         </article>
         {% endfor %}
       </div>
+      <div>
+        <a href="{% url 'collection_update' collection.pk %}" class="button is-info mt-5"
+        >Update Collection</a
+      >
+      </div>
 </section>
 {% endblock %}

@@ -105,3 +105,10 @@ class CollectionCreate(CreateView):
     fields = ['name', 'image', 'paintings']
     template_name = "collection_create.html"
     success_url = '/collections/'
+
+class CollectionUpdate(UpdateView):
+    model = Collection
+    fields = ['name', 'image', 'paintings']
+    template_name = "collection_update.html"
+    def success_url(self):
+        return reverse('collection_detail', kwargs={'pk': self.object.pk})

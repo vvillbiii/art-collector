@@ -8,11 +8,14 @@
 </section>
 <section class="container mt-5">
   <div>{{article.body}}</div>
-  <a href="{% url 'article_update' article.pk %}" class="button is-info mt-5"
-    >Update Article</a
-  >
-  <a href="{% url 'article_delete' article.pk %}" class="button is-danger"
-    >Delete {{article.title}}</a
-  >
+  <div class="mt-5">
+    <a href="{% url 'article_update' article.pk %}" class="button is-info"
+      >Update Article</a
+    >
+    <a href="{% url 'article_delete' article.pk %}" class="button is-danger"
+      >Delete
+      <article></article
+    ></a>
+  </div>
 </section>
 {% endblock %}

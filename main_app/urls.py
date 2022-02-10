@@ -19,4 +19,5 @@ urlpatterns = [
     path('collections/', views.CollectionList.as_view(), name="collection_list"),
     path('collections/new', views.CollectionCreate.as_view(), name="collection_create"),
     path('collections/<int:pk>/', views.CollectionDetail.as_view(), name='collection_detail'),
+    path('collections/<int:pk>/update', views.CollectionUpdate.as_view(), name="collection_update"),
 ]
