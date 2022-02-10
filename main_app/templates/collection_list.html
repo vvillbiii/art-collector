@@ -7,8 +7,17 @@
 <section class="container">
   <div class="gallery mt-5">
     {% for collection in collections %}
-    <a href="{% url 'collection_detail' collection.pk %}" class="title is-4"
-      >{{collection.name}}
+    <a href="{% url 'collection_detail' collection.pk %}" class="title is-4">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-square">
+            <img src="{{collection.image}}" alt="{{collection.name}}" />
+          </figure>
+        </div>
+        <div class="card-header">
+          <p class="card-header-title">{{collection.name}}</p>
+        </div>
+      </div>
     </a>
     {% endfor %}
   </div>

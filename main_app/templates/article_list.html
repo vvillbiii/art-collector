@@ -7,12 +7,21 @@
 <section class="container">
   <div class="gallery mt-5">
     {% for article in articles %}
-    <a href="{% url 'article_detail' article.pk %}" class="title is-4"
-      >{{article.title}}
+    <a href="{% url 'article_detail' article.pk %}">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-square">
+            <img src="{{article.image}}" alt="{{article.title}}" />
+          </figure>
+        </div>
+        <div class="card-header">
+          <p class="card-header-title">{{article.title}}</p>
+        </div>
+      </div>
     </a>
     {% endfor %}
   </div>
-  <a href="{% url 'article_create' %}" class="button is-info"
+  <a href="{% url 'article_create' %}" class="button is-info mt-5"
     >Write New Article</a
   >
 </section>
