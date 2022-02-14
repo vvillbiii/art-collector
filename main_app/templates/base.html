@@ -34,8 +34,17 @@
         <a class="navbar-item" href="/collections">Collections</a>
         <a class="navbar-item" href="/articles">Articles</a>
       </div>
-      <div class="navbar-menu navbar-end">
-        <a class="navbar-item" href="/">Become a Member</a>
+        {% if user.is_authenticated %}
+                    <div class="navbar-menu navbar-end">
+                        <span class="navbar-item">Welcome: {{user.username}}</span>
+                        <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                {% else %}
+                    <div class="navbar-menu navbar-end">
+                        <a class="navbar-item" href="{% url 'login' %}">Log In</a>
+                        <a class="navbar-item" href="{% url 'signup' %}">Become a Member</a>
+                    </div>
+                {% endif %}
       </div>
     </nav>
     {% block content %}{% endblock %}

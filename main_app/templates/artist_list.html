@@ -5,7 +5,13 @@
   </div>
 </section>
 <section class="container mt-5">
-  <a href="{% url 'artist_create' %}" class="button is-info">Add New Artist</a>
+  {% if user.is_authenticated %}
+  <div>
+    <a href="{% url 'artist_create' %}" class="button is-info"
+      >Add New Artist</a
+    >
+  </div>
+  {% endif %}
   <div class="gallery mt-5">
     {% for painter in painters %}
     <a href="{% url 'artist_detail' painter.pk %}">

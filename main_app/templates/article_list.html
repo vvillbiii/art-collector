@@ -4,7 +4,7 @@
     <p class="title is-1">Articles</p>
   </div>
 </section>
-<section class="container">
+<section class="container mb-5">
   <div class="gallery mt-5">
     {% for article in articles %}
     <a href="{% url 'article_detail' article.pk %}">
@@ -21,9 +21,13 @@
     </a>
     {% endfor %}
   </div>
-  <a href="{% url 'article_create' %}" class="button is-info mt-5"
-    >Write New Article</a
-  >
+  {% if user.is_authenticated %}
+  <div>
+    <a href="{% url 'article_create' %}" class="button is-info mt-5"
+      >Write New Article</a
+    >
+  </div>
+  {% endif %}
 </section>
 
 {% endblock %}

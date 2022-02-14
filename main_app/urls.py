@@ -20,4 +20,7 @@ urlpatterns = [
     path('collections/new', views.CollectionCreate.as_view(), name="collection_create"),
     path('collections/<int:pk>/', views.CollectionDetail.as_view(), name='collection_detail'),
     path('collections/<int:pk>/update', views.CollectionUpdate.as_view(), name="collection_update"),
+    path('accounts/signup', views.Signup.as_view(), name="signup"),
+    path('articles/<int:pk>/comments/new', views.CommentCreate.as_view(), name="comment_create"),
+    path('/profile/<int:pk>', views.Profile.as_view(), name="profile")
 ]

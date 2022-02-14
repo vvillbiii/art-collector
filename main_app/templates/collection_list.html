@@ -21,8 +21,12 @@
     </a>
     {% endfor %}
   </div>
-  <a href="{% url 'collection_create' %}" class="button is-info"
-    >Add New Collection</a
-  >
+  {% if user.is_authenticated %}
+  <div>
+    <a href="{% url 'collection_create' %}" class="button is-info"
+      >Add New Collection</a
+    >
+  </div>
+  {% endif %}
 </section>
 {% endblock %}

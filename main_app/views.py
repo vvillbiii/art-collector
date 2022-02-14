@@ -3,10 +3,13 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Artist, Painting, Article, Collection
+from .models import Artist, Painting, Article, Collection, Comment, Profile
 from django.shortcuts import redirect
 from django.urls import reverse
-
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 class Home(TemplateView):
@@ -100,6 +103,7 @@ class CollectionDetail(DetailView):
     model = Collection
     template_name = "collection_detail.html"
 
+@method_decorator(login_required, name='dispatch')
 class CollectionCreate(CreateView):
     model = Collection
     fields = ['name', 'image', 'paintings']
@@ -112,3 +116,30 @@ class CollectionUpdate(UpdateView):
     template_name = "collection_update.html"
     def success_url(self):
         return reverse('collection_detail', kwargs={'pk': self.object.pk})
+
+class Signup(View):
+     def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "registration/signup.html", context)
+    
+     def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("artist_list")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)
+
+class CommentCreate(View):
+    def post(self, request, pk, upk):
+        body = request.POST.get("body")
+        article = Article.objects.get(pk=pk)
+        user = User.objects.get(upk=pk)
+        Comment.objects.create(body=body, article=article, user=user)
+        return redirect('article_detail', pk=pk)
+
+class Profile(TemplateView):
+    template_name = "profile.html"

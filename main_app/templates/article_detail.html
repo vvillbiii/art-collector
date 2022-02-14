@@ -6,8 +6,76 @@
     <p class="subtitle">{{article.author}}</p>
   </div>
 </section>
-<section class="container mt-5">
+<section class="container mt-5 mb-5">
   <div>{{article.body}}</div>
+  <div>
+    {% if user.is_authenticated %}
+    <h1 class="title is-5 mt-5">Add a Comment</h1>
+
+    <form
+      class="mb-5"
+      action="{% url 'comment_create' article.pk %}"
+      method="post"
+    >
+      {% csrf_token %}
+      <div class="field has-addons">
+        <div class="control">
+          <textarea class="textarea" name="body" placeholder="Write Comment"></textarea>
+        </div>
+        </div>
+        <div class="control">
+          <input class="button is-primary" type="submit" value="Add Comment" />
+        </div>
+      </div>
+    </form>
+    {% endif %}
+  </div>
+  <div class="mt-5">
+    {% for comment in article.comments.all %}
+    <div class="box">
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-64x64">
+            <img src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>{{comment.user.username}}</strong>
+              <br>
+              {{comment.body}}</p>
+            </p>
+          </div>
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <a class="level-item" aria-label="reply">
+                <span class="icon is-small">
+                  <i class="fas fa-reply" aria-hidden="true"></i>
+                </span>
+              </a>
+              <a class="level-item" aria-label="retweet">
+                <span class="icon is-small">
+                  <i class="fas fa-retweet" aria-hidden="true"></i>
+                </span>
+              </a>
+              <a class="level-item" aria-label="like">
+                <span class="icon is-small">
+                  <i class="fas fa-heart" aria-hidden="true"></i>
+                </span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      </article>
+    </div>
+    {% empty %}
+    <div>
+      <p class="title is-5">No comments</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% if user.is_authenticated %}
   <div class="mt-5">
     <a href="{% url 'article_update' article.pk %}" class="button is-info"
       >Update Article</a
@@ -17,5 +85,6 @@
       <article></article
     ></a>
   </div>
+  {% endif %}
 </section>
 {% endblock %}
