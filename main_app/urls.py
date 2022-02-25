@@ -22,5 +22,5 @@ urlpatterns = [
     path('collections/<int:pk>/update', views.CollectionUpdate.as_view(), name="collection_update"),
     path('accounts/signup', views.Signup.as_view(), name="signup"),
     path('articles/<int:pk>/comments/new', views.CommentCreate.as_view(), name="comment_create"),
-    path('/profile/<int:pk>', views.Profile.as_view(), name="profile")
+    path('profile/<int:pk>', views.Profile.as_view(), name="profile")
 ]

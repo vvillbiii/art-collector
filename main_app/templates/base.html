@@ -9,12 +9,13 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="{% static 'scripts/main.js' %}" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Art Collector</title>
   </head>
-  <body>
-    <nav class="navbar is-white" role="navigation" aria-label="main navigation">
+  <body class="light">
+    <nav class="navbar is-success " role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">Art Collector</a>
         <a
@@ -23,7 +24,7 @@
           aria-label="menu"
           aria-expanded="false"
         >
-          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span> 
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
@@ -33,6 +34,21 @@
         <a class="navbar-item" href="/artists">Artists</a>
         <a class="navbar-item" href="/collections">Collections</a>
         <a class="navbar-item" href="/articles">Articles</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Theme
+          </a>
+  
+          <div class="navbar-dropdown">
+            <a class="navbar-item" id="light" >
+              Light Mode
+            </a>
+            <a class="navbar-item" id="dark">
+              Dark Mode
+            </a>
+          </div>
+        </div>
+      </div>
       </div>
         {% if user.is_authenticated %}
                     <div class="navbar-menu navbar-end">
